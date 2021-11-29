@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
+import { Pessoa } from './model/pessoa';
+import { PessoaService } from './service/pessoa.service';
 
 @Component({
   selector: 'app-root',
@@ -7,8 +10,40 @@ import { Component } from '@angular/core';
 })
 
 export class AppComponent {
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = ELEMENT_DATA;
+  displayedColumns: string[] = ['id', 'nome', 'acoes'];
+  dataSource;
+  mostrarFormulario = false;
+  pessoa: Pessoa = new Pessoa();
+
+  constructor(private service: PessoaService) {
+  }
+
+  ngOnInit(): void {
+    this.findAll();
+  }
+
+  delete(id) {
+    this.service.delete(id).subscribe(
+      (response) => {
+        this.findAll();
+      },
+      (response) => {
+        alert("Erro!");
+      }
+    );
+  }
+
+  findAll() {
+    this.service.findAll().subscribe(
+      (response) => {
+        //alert('Sucesso!');
+        this.dataSource = new MatTableDataSource<Pessoa>(response);
+      },
+      (response) => {
+        alert('Erro!');
+      }
+    );
+  }
 }
 
 export interface PeriodicElement {

@@ -22,6 +22,24 @@ export class AppComponent {
     this.findAll();
   }
 
+  editar(element) {
+    this.mostrarFormulario = true;
+    this.pessoa = element;
+  }
+
+  salvar() {
+    this.mostrarFormulario = false;
+
+    this.service.update(this.pessoa).subscribe(
+      (response) => {
+        this.findAll();
+      },
+      (response) => {
+        alert("Erro!");
+      }
+    )
+  }
+
   delete(id) {
     this.service.delete(id).subscribe(
       (response) => {

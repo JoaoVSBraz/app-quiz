@@ -360,10 +360,12 @@
   <h2>Pessoas</h2>
   <p>Aqui vamos gerenciar a entidade pessoa!</p>
 
+  <button mat-raised-button color="primary" (click)="novaPessoa()">Nova Pessoa</button>
+
   <form class="formulario" *ngIf="mostrarFormulario">
     <mat-form-field class="example-form-field" appearance="fill">
       <mat-label>ID</mat-label>
-      <input matInput type="text" [(ngModel)]="pessoa.id" name="id">
+      <input matInput type="text" [(ngModel)]="pessoa.id" name="id" readonly/>
     </mat-form-field>
 
     <mat-form-field appearance="fill">

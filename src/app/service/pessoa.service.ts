@@ -17,7 +17,7 @@ export class PessoaService {
   }
 
   update(pessoa: Pessoa) {
-    return this.http.put<Pessoa[]>(this.URL_API + '/pessoa', pessoa)
+    return this.http.put<Pessoa[]>(this.URL_API + '/pessoa/' + pessoa.id, pessoa)
   }
 
   findAll() {
